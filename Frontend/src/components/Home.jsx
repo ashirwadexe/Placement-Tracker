@@ -1,12 +1,12 @@
 import React from 'react'
 import Hero from './Hero'
-import Navbar from './Navbar'
+import Card from './Card'
 
 const Home = () => {
   return (
     <div>
-        
         <Hero/>
+        <Card/>
     </div>
   )
 }

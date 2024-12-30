@@ -1,40 +1,44 @@
-/* App.css */
-
 /* Ensure the body and html take full height */
 html, body {
   height: 100%;
   margin: 0;
+  overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 /* Apply the background gradient */
 body {
   background: #0f0c29;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to bottom, #24243e, #302b63, #0f0c29);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to bottom, #24243e, #302b63, #0f0c29); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  color: white;  /* Text color */
-  font-family: Arial, sans-serif; /* Optional */
-  min-height: 100vh;  /* Ensure the background covers the full height of the screen */
-  display: flex; /* Allows content to be centered if needed */
-  flex-direction: column; /* Optional */
+  background: linear-gradient(to bottom, #24243e, #302b63, #0f0c29); 
+  color: white;  
+  font-family: Arial, sans-serif;
+  min-height: 100vh;  
   position: relative;
 }
 
-/* Optional: Centering text if needed */
-h1, p {
-  z-index: 2;  /* Ensure text is above the background */
+/* Grid and gradient applied to scroll with the page */
+body::before {
+  content: '';
+  position: fixed;  /* Fix it to the viewport but stretch across full page */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;  
+  z-index: -1;  /* Behind content but scrolls with it */
+  pointer-events: none;  /* Prevents interaction with the grid */
 }
 
-/* Create a grid pattern of lines */
-body::before {
+/* Optional: Create a subtle parallax effect */
+body::after {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-  background-size: 30px 30px;  /* Size of each square */
-  z-index: 1;  /* Place the grid behind the content */
+  width: 100%;
+  height: 300%; /* Extend gradient for long scrolling pages */
+  background: linear-gradient(to bottom, #24243e, #302b63, #0f0c29);
+  z-index: -2;
 }
