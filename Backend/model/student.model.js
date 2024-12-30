@@ -14,7 +14,7 @@ const studentSchema = new mongoose.Schema({
         required: true
     },
     batch: {
-        type: String,
+        type: Number,
         required: true
     },
     collage: {
@@ -53,7 +53,8 @@ const studentSchema = new mongoose.Schema({
         match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     },
     location: {
-        type: String
+        type: String,
+        required: true
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
