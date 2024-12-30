@@ -20,7 +20,8 @@ export const createStudent = async (req, res) => {
             branch, 
             collage, 
             companyName, 
-            role, jobType, 
+            role, 
+            jobType, 
             linkedin, 
             companyWebsite, 
             email, 
@@ -40,3 +41,18 @@ export const createStudent = async (req, res) => {
         console.log(error);
     }
 };
+
+//BUSINESS LOGIC TO GET ALL STUDENTS
+export const getAllStudents = async (req, res) => {
+    try {
+        const students = await Student.find();
+
+        return res.status(200).json({
+            success: true,
+            students
+        });
+
+    } catch (error) {
+        console.log(error);
+    }
+}
