@@ -1,16 +1,37 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import img from "../assets/ashirwaddp.jpg"
 import { Badge } from './ui/badge'
 import { Building2Icon, Globe, Linkedin, User } from 'lucide-react'
+import axios from 'axios'
+import toast from 'react-hot-toast'
 
 const Card = () => {
-  const std = [1, 2, 3, 4, 5, 6, 7];
+
+  const std = [1,2,3,4,5];
+
+  const [studentCard, setStudentCard] = useState([]);
+
+  useEffect(() => {
+    const fetchStudents = async () => {
+      try {
+        const res = await axios.get("http://localhost:8080/api/v1/admin/student/getAllStudents");
+        console.log(res);
+        if(res.data.success) {
+          setStudentCard(res.data.studentCard);
+        }
+      } catch (error) {
+        console.log(error);
+        toast.error(error.response.data.message);
+      }
+    };
+    fetchStudents();
+  }, []);
 
   return (
     <>
       <div className='grid grid-cols-3 gap-6 mx-40'>
         {
-          std.map((item, index) => {
+          studentCard.map((c) => {
             const [position, setPosition] = useState({ x: 0, y: 0 });
 
             const handleMouseMove = (e) => {
@@ -29,7 +50,7 @@ const Card = () => {
 
             return (
               <div 
-                key={index}
+                key={c}
                 onMouseMove={handleMouseMove}
                 onMouseLeave={handleMouseLeave}
                 className='relative flex items-start justify-center gap-3 flex-col p-5 rounded-xl cursor-pointer transition-transform duration-300 ease-out bg-white/10 backdrop-blur-xl shadow-2xl border-[2px] border-white/10'
@@ -46,7 +67,7 @@ const Card = () => {
                     <Badge className='bg-white/20 text-white shadow-sm'>
                       <User size={14} className='mr-1' /> Student Details
                     </Badge>
-                    <p className='text-lg font-semibold text-white leading-tight mt-2'>Ashirwad Chaurasia</p>
+                    <p className='text-lg font-semibold text-white leading-tight mt-2'>Ashirwad</p>
                     <p className='text-sm text-gray-300'>12323407033</p>
                     <p className='text-sm text-gray-300'>BCA</p>
                     <p className='text-sm text-gray-300'>KIMS, Varanasi</p>

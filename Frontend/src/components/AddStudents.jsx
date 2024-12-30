@@ -3,6 +3,7 @@ import { Button } from './ui/button'
 import toast from 'react-hot-toast'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import StudentForm from './StudentForm'
 
 const AddStudents = () => {
 
@@ -21,13 +22,14 @@ const AddStudents = () => {
     }
     return (
         <>
-            <div className='mx-40 my-10'>
+            <div className='mx-10 my-10 flex flex-col items-center justify-center'>
                 <button
                     className='border px-7 py-2 rounded-full bg-white bg-opacity-10 font-semibold'
                     onClick={logoutHandler}
                 >
                     Logout
                 </button>
+                <StudentForm/>
             </div>
         </>
     )
