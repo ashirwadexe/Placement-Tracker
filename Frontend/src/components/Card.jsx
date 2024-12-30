@@ -7,17 +7,15 @@ import toast from 'react-hot-toast'
 
 const Card = () => {
 
-  const std = [1,2,3,4,5];
-
   const [studentCard, setStudentCard] = useState([]);
-
+  
   useEffect(() => {
     const fetchStudents = async () => {
       try {
         const res = await axios.get("http://localhost:8080/api/v1/admin/student/getAllStudents");
         console.log(res);
         if(res.data.success) {
-          setStudentCard(res.data.studentCard);
+          setStudentCard(res.data.students);
         }
       } catch (error) {
         console.log(error);
@@ -32,32 +30,10 @@ const Card = () => {
       <div className='grid grid-cols-3 gap-6 mx-40'>
         {
           studentCard.map((c) => {
-            const [position, setPosition] = useState({ x: 0, y: 0 });
-
-            const handleMouseMove = (e) => {
-              const { clientX, clientY } = e;
-              const rect = e.currentTarget.getBoundingClientRect();
-              
-              setPosition({
-                x: clientX - rect.left,
-                y: clientY - rect.top
-              });
-            };
-
-            const handleMouseLeave = () => {
-              setPosition({ x: 0, y: 0 });  // Reset position when mouse leaves
-            };
-
             return (
               <div 
-                key={c}
-                onMouseMove={handleMouseMove}
-                onMouseLeave={handleMouseLeave}
+                key={c._id}
                 className='relative flex items-start justify-center gap-3 flex-col p-5 rounded-xl cursor-pointer transition-transform duration-300 ease-out bg-white/10 backdrop-blur-xl shadow-2xl border-[2px] border-white/10'
-                style={{
-                  transform: `translate(${position.x * 0.03}px, ${position.y * 0.03}px)`,
-                  background: `radial-gradient(circle at ${position.x}px ${position.y}px, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0))`
-                }}
               >
                 <div className='flex items-center justify-center gap-3 '>
                   <div className='w-[130px] border-[1px] border-white/30 rounded-lg overflow-hidden'>
