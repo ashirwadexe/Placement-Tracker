@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Input } from './ui/input'
-import { BadgeCheck, BriefcaseBusinessIcon, Building2Icon, Calendar, GraduationCap, IndianRupeeIcon, Link2, LinkedinIcon, Mail, Navigation, Split, User } from 'lucide-react'
+import { BadgeCheck, BriefcaseBusinessIcon, Building2Icon, Calendar, GraduationCap, IndianRupeeIcon, Link2, LinkedinIcon, Navigation, Split, User } from 'lucide-react'
 import { Badge } from './ui/badge'
 import { Button } from './ui/button'
 import toast from 'react-hot-toast'
@@ -24,35 +24,86 @@ const StudentForm = () => {
         linkedin: "",
     });
 
+    const [position, setPosition] = useState({ x: 0, y: 0 });
+
     const inputHandler = (e) => {
         setStudent({...student, [e.target.name]: e.target.value});
     };
 
-    const submitHandler = async () => {
-        try {
-            const res = await axios.post("http://localhost:8080/api/v1/admin/student/createStudent", student, 
-                {
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    withCredentials: true
-                }
-            );
-            console.log(res);
-            if(res.data.success) {
-                toast.success(res.data.message);
-            }
-        } catch (error) {
-            toast.error(error.response.data.message);
-        }
+    const handleMouseMove = (e) => {
+        const { clientX, clientY } = e;
+        const rect = e.currentTarget.getBoundingClientRect();
+
+        setPosition({
+            x: clientX - rect.left,
+            y: clientY - rect.top
+        });
     };
 
+    const handleMouseLeave = () => {
+        setPosition({ x: 0, y: 0 });
+    };
+
+    const submitHandler = async () => {
+        try {
+            // Filter out empty fields
+            const filteredStudent = Object.fromEntries(
+                Object.entries(student).filter(([_, value]) => value.trim() !== "")
+            );
+    
+            const res = await axios.post(
+                "http://localhost:8080/api/v1/admin/student/createStudent",
+                filteredStudent,
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    withCredentials: true,
+                }
+            );
+    
+            console.log(res);
+            if (res.data.success) {
+                toast.success(res.data.message);
+    
+                // Reset form after successful submission
+                setStudent({
+                    name: "",
+                    rollNo: "",
+                    collage: "",
+                    branch: "",
+                    batch: "",
+                    companyName: "",
+                    role: "",
+                    salary: "",
+                    jobType: "",
+                    location: "",
+                    companyWebsite: "",
+                    email: "",
+                    linkedin: "",
+                });
+            }
+        } catch (error) {
+            toast.error(error.response?.data?.message || "An error occurred");
+        }
+    };
+    
+    
 
 
 
     return (
         <>
-            <div className='border p-5 mt-10'>
+            <div className='min-h-screen flex flex-col items-center justify-center'>
+                <div
+                    onMouseMove={handleMouseMove}
+                    onMouseLeave={handleMouseLeave}
+                    className="relative border p-5 rounded-xl shadow-lg transition-transform duration-300 ease-out bg-white/10 backdrop-blur-xl border-white/20"
+                    style={{
+                        transform: `translate(${position.x * 0.03}px, ${position.y * 0.03}px)`,
+                        background: `radial-gradient(circle at ${position.x}px ${position.y}px, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0))`
+                    }}
+                >
                 <h1 className='mb-5 text-3xl font-semibold text-center'>Add Placed Student🥳</h1>
 
                 <div className='flex flex-col items-start justify-center gap-3'>
@@ -212,21 +263,11 @@ const StudentForm = () => {
                             />
                             <LinkedinIcon size={19} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
                         </div>
-                        <div className="relative w-[300px]">
-                            <Input
-                            type="url"
-                            placeholder="EMail URL"
-                            name="email"
-                            value={student.email}
-                            onChange={inputHandler}
-                            className="pl-10 py-2 pr-4"
-                            />
-                            <Mail size={19} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
-                        </div>
                     </div>
                 </div>
 
                 <Button onClick={submitHandler} className="w-full bg-white text-black font-semibold text-md hover:bg-gray-200 mt-4">Add Student</Button>
+                </div>
             </div>
         </>
     )

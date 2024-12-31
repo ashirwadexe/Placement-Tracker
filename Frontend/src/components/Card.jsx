@@ -4,6 +4,8 @@ import { Badge } from './ui/badge';
 import { Building2Icon, Globe, Linkedin, MailsIcon, User } from 'lucide-react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { CoolMode } from './ui/cool-mode';
+import { Button } from './ui/button';
 
 const Card = () => {
   const [studentCard, setStudentCard] = useState([]);
@@ -12,8 +14,12 @@ const Card = () => {
     const fetchStudents = async () => {
       try {
         const res = await axios.get("http://localhost:8080/api/v1/admin/student/getAllStudents");
-        if(res.data.success) {
-          setStudentCard(res.data.students);
+        if (res.data.success) {
+          // Sort by the createdAt date and take the 6 most recent students
+          const sortedStudents = res.data.students
+            .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) // Sort by the most recent date
+            .slice(0, 6); // Limit to 6 students
+          setStudentCard(sortedStudents);
         }
       } catch (error) {
         toast.error(error.response.data.message);
@@ -43,54 +49,82 @@ const Card = () => {
   };
 
   return (
-    <div className='grid grid-cols-3 gap-6 mx-40'>
-      {studentCard.map((c) => (
-        <div 
-          key={c._id}
-          className='relative flex items-start justify-center gap-3 flex-col p-5 rounded-xl cursor-pointer bg-white/10 backdrop-blur-xl shadow-2xl border-[2px] border-white/10 hover:shadow-3xl hover:scale-[1.02] glow-effect'
-          onMouseMove={handleMouseMove}
-          onMouseLeave={handleMouseLeave}
-        >
-          <div className='flex items-center justify-center gap-3 '>
-            <div className='w-[130px] border-[1px] border-white/30 rounded-lg overflow-hidden'>
-              <img src={img} alt="student-img" className='w-full object-cover'/>
+    <>
+      <div className='flex items-center justify-evenly gap-80'>
+        <div className='flex flex-wrap items-center'>
+          <p>Recently placed students</p>
+          <img
+            alt="waving-hand"
+            src="/waving-hand.gif"
+            className="w-[30px] h-[30px] object-contain"
+            decoding="async"
+            loading="lazy"
+          />
+        </div>
+        <div>
+          <CoolMode><Button>Click Me to Celebrate🥳</Button></CoolMode>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-3 gap-6 mb-20">
+        {studentCard.map((c) => (
+          <div
+            key={c._id}
+            className="relative flex items-start justify-center gap-3 flex-col p-5 rounded-xl cursor-pointer bg-white/10 backdrop-blur-xl shadow-2xl border-[2px] border-white/10 hover:shadow-3xl hover:scale-[1.02] glow-effect"
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+          >
+            <div className="flex items-center justify-center gap-3 ">
+              <div className="w-[130px] border-[1px] border-white/30 rounded-lg overflow-hidden">
+                <img
+                  src={img}
+                  alt="student-img"
+                  className="w-full object-cover"
+                />
+              </div>
+              <div>
+                <Badge className="bg-white/20 text-white shadow-sm">
+                  <User size={14} className="mr-1" /> Student Details
+                </Badge>
+                <p className="text-lg font-semibold text-white leading-tight mt-2">
+                  {c.name}
+                </p>
+                <p className="text-sm text-gray-300">{c.rollNo}</p>
+                <p className="text-sm text-gray-300">{c.branch}</p>
+                <p className="text-sm text-gray-300">{c.collage}</p>
+                <p className="text-sm text-gray-300">{c.batch}</p>
+              </div>
             </div>
             <div>
-              <Badge className='bg-white/20 text-white shadow-sm'>
-                <User size={14} className='mr-1' /> Student Details
+              <Badge className="bg-white/20 text-white shadow-sm">
+                <Building2Icon size={14} className="mr-2" /> Company Details
               </Badge>
-              <p className='text-lg font-semibold text-white leading-tight mt-2'>{c.name}</p>
-              <p className='text-sm text-gray-300'>{c.rollNo}</p>
-              <p className='text-sm text-gray-300'>{c.branch}</p>
-              <p className='text-sm text-gray-300'>{c.collage}</p>
-              <p className='text-sm text-gray-300'>{c.batch}</p>
+              <p className="text-lg font-semibold text-white leading-tight mt-2">
+                {c.companyName}
+              </p>
+              <p className="text-sm text-gray-300">{c.role}</p>
+              <p className="text-sm text-gray-300">{c.salary} LPA</p>
+              <p className="text-sm text-gray-300">{c.jobType}</p>
+              <p className="text-sm text-gray-300">{c.location}</p>
+            </div>
+            <div className="flex gap-3">
+              <a href={c.companyWebsite} target="_blank">
+                <Badge className="bg-white/20 text-white shadow-sm">
+                  <Globe size={14} className="mr-2" />
+                  Website
+                </Badge>
+              </a>
+              <a href={c.linkedin} target="_blank">
+                <Badge className="bg-white/20 text-white shadow-sm">
+                  <Linkedin size={14} className="mr-2" />
+                  LinkedIn
+                </Badge>
+              </a>
             </div>
           </div>
-          <div>
-            <Badge className='bg-white/20 text-white shadow-sm'>
-              <Building2Icon size={14} className='mr-2' /> Company Details
-            </Badge>
-            <p className='text-lg font-semibold text-white leading-tight mt-2'>{c.companyName}</p>
-            <p className='text-sm text-gray-300'>{c.role}</p>
-            <p className='text-sm text-gray-300'>{c.salary} LPA</p>
-            <p className='text-sm text-gray-300'>{c.jobType}</p>
-            <p className='text-sm text-gray-300'>{c.location}</p>
-          </div>
-          <div className='flex gap-3'>
-            <a href={c.companyWebsite} target='_blank'>
-              <Badge className='bg-white/20 text-white shadow-sm'>
-                <Globe size={14} className='mr-2' />Website
-              </Badge>
-            </a>
-            <a href={c.linkedin} target='_blank'>
-              <Badge className='bg-white/20 text-white shadow-sm'>
-                <Linkedin size={14} className='mr-2' />LinkedIn
-              </Badge>
-            </a>
-          </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+    </>
   );
 };
 

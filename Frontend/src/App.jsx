@@ -4,6 +4,7 @@ import Home from './components/Home'
 import './App.css'
 import AdminLogin from './components/AdminLogin'
 import AddStudents from './components/AddStudents'
+import AllPlacedStudents from './components/AllPlacedStudents'
 
 const App = () => {
 
@@ -19,6 +20,10 @@ const App = () => {
     {
       path: "/admin/addstudents",
       element: <AddStudents/>
+    },
+    {
+      path: "/all-placed-students",
+      element: <AllPlacedStudents/>
     }
   ]);
 

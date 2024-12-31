@@ -22,13 +22,13 @@ const AddStudents = () => {
     }
     return (
         <>
-            <div className='mx-10 my-10 flex flex-col items-center justify-center'>
-                <button
-                    className='border px-7 py-2 rounded-full bg-white bg-opacity-10 font-semibold'
+            <button
+                    className='border px-7 py-2 mt-10 ml-10 rounded-full bg-white bg-opacity-10 font-semibold'
                     onClick={logoutHandler}
                 >
                     Logout
-                </button>
+            </button>
+            <div className='flex flex-col items-center justify-center'>
                 <StudentForm/>
             </div>
         </>

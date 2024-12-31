@@ -9,8 +9,7 @@ html, body {
 body {
   background: #0f0c29;  /* fallback for old browsers */
   background: linear-gradient(to bottom, #24243e, #302b63, #0f0c29); 
-  color: white;  
-  font-family: Arial, sans-serif;
+  color: white; 
   min-height: 100vh;  
   position: relative;
 }
@@ -38,7 +37,16 @@ body::after {
   top: 0;
   left: 0;
   width: 100%;
-  height: 300%; /* Extend gradient for long scrolling pages */
+  /* height: 300%; Extend gradient for long scrolling pages */
   background: linear-gradient(to bottom, #24243e, #302b63, #0f0c29);
   z-index: -2;
 }
+
+/** Text Gradient Example */ 
+.text-gradient {
+  color: #5782bb; 
+  background-image: linear-gradient(45deg, #5782bb 21%, #c80e9c 100%, #3d9eb8 35%); 
+  background-clip: text; 
+  -webkit-background-clip: text; 
+  -webkit-text-fill-color: transparent; 
+ }
