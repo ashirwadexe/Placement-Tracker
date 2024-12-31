@@ -6,7 +6,7 @@ export const createStudent = async (req, res) => {
         const { name, rollNo, branch, collage, companyName, role, jobType, linkedin, companyWebsite, email, location, batch, salary } = req.body;
         const userId = req.id;
 
-        if(!name || !rollNo || !collage || !branch || !companyName || !role || !jobType || !linkedin || !companyWebsite || !email || !location || !batch || !salary) {
+        if(!name || !rollNo || !collage || !branch || !companyName || !role || !jobType || !linkedin || !companyWebsite || !location || !batch || !salary) {
             return res.status(404).json({
                 message: "Something is missing 🧐",
                 success: false
@@ -24,7 +24,6 @@ export const createStudent = async (req, res) => {
             jobType, 
             linkedin, 
             companyWebsite, 
-            email, 
             location, 
             batch, 
             salary,
