@@ -13,13 +13,16 @@ const AddStudents = () => {
         try {
             const res = await axios.get("http://localhost:8080/api/v1/admin/logout");
             if(res.data.success) {
+                localStorage.removeItem("token");  // Clear token
+                sessionStorage.clear();  // Optional
                 toast.success(res.data.message);
                 navigate("/admin");
             }
         } catch (error) {
-            toast.error(error.response.data.message);
+            toast.error(error.response?.data?.message || "Logout failed");
         }
     }
+    
     return (
         <>
             <button

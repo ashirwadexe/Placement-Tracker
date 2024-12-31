@@ -50,22 +50,6 @@ const Card = () => {
 
   return (
     <>
-      <div className='flex items-center justify-evenly gap-80'>
-        <div className='flex flex-wrap items-center'>
-          <p>Recently placed students</p>
-          <img
-            alt="waving-hand"
-            src="/waving-hand.gif"
-            className="w-[30px] h-[30px] object-contain"
-            decoding="async"
-            loading="lazy"
-          />
-        </div>
-        <div>
-          <CoolMode><Button>Click Me to Celebrate🥳</Button></CoolMode>
-        </div>
-      </div>
-
       <div className="grid grid-cols-3 gap-6 mb-20">
         {studentCard.map((c) => (
           <div
