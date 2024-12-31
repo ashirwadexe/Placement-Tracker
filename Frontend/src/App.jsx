@@ -18,7 +18,7 @@ const App = () => {
       element: <AdminLogin/>
     },
     {
-      path: "/admin/addstudents",
+      path: "/admin/add-students",
       element: <AddStudents/>
     },
     {

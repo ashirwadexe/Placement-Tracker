@@ -45,7 +45,7 @@ const AdminLogin = () => {
       console.log(res);
       if (res.data.success) {
         toast.success(res.data.message);
-        navigate("/admin/addStudents");
+        navigate("/admin/add-students");
       }
     } catch (error) {
       toast.error(error.response.data.message);
