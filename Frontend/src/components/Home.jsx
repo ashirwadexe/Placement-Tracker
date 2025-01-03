@@ -15,7 +15,7 @@ const Home = () => {
         <Hero />
         <div className="flex gap-2 my-3">
           <Button 
-            onClick={()=> toast.success("Placement Calender is not available right now. Please check back later.")}
+            onClick={()=> navigate("/placement-calender")}
             className="bg-red-500 hover:bg-red-400 font-sans">
             Placement Calender
           </Button>

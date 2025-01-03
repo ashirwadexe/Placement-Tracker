@@ -11,7 +11,7 @@ const AddStudents = () => {
 
     const logoutHandler = async () => {
         try {
-            const res = await axios.get("http://localhost:8080/api/v1/admin/logout");
+            const res = await axios.get("http://localhost:3000/api/v1/admin/logout");
             if(res.data.success) {
                 localStorage.removeItem("token");  // Clear token
                 sessionStorage.clear();  // Optional

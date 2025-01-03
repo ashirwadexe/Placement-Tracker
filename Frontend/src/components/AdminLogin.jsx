@@ -36,7 +36,7 @@ const AdminLogin = () => {
 
   const submitHandler = async () => {
     try {
-      const res = await axios.post("http://localhost:8080/api/v1/admin/login", admin, {
+      const res = await axios.post("http://localhost:3000/api/v1/admin/login", admin, {
         headers: {
           "Content-Type": "application/json",
         },

@@ -5,6 +5,7 @@ import './App.css'
 import AdminLogin from './components/AdminLogin'
 import AddStudents from './components/AddStudents'
 import AllPlacedStudents from './components/AllPlacedStudents'
+import PlacementCalender from './page/PlacementCalender'
 
 const App = () => {
 
@@ -24,6 +25,10 @@ const App = () => {
     {
       path: "/all-placed-students",
       element: <AllPlacedStudents/>
+    },
+    {
+      path: "/placement-calender",
+      element: <PlacementCalender/>
     }
   ]);
 

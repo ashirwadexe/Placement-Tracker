@@ -7,7 +7,6 @@ import { Button } from "./ui/button";
 import toast from "react-hot-toast";
 
 const Hero = () => {
-  const [search, setSearch] = useState("");
 
   const handleSearch = () => {
     toast.success("Search Functionality will be added soon.");

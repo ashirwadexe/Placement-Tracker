@@ -11,7 +11,7 @@ const AllPlacedStudents = () => {
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/api/v1/admin/student/getAllStudents");
+        const res = await axios.get("http://localhost:3000/api/v1/admin/student/getAllStudents");
         if(res.data.success) {
           setStudentCard(res.data.students);
         }

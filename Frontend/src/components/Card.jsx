@@ -13,7 +13,7 @@ const Card = () => {
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/api/v1/admin/student/getAllStudents");
+        const res = await axios.get("http://localhost:3000/api/v1/admin/student/getAllStudents");
         if (res.data.success) {
           // Sort by the createdAt date and take the 6 most recent students
           const sortedStudents = res.data.students
