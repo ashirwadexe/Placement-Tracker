@@ -6,6 +6,8 @@ import AdminLogin from './components/AdminLogin'
 import AddStudents from './components/AddStudents'
 import AllPlacedStudents from './components/AllPlacedStudents'
 import PlacementCalender from './page/PlacementCalender'
+import AdminDashboard from './components/Admin/AdminDashboard'
+import AddDrive from './components/Admin/AddDrive'
 
 const App = () => {
 
@@ -29,6 +31,14 @@ const App = () => {
     {
       path: "/placement-calender",
       element: <PlacementCalender/>
+    },
+    {
+      path: "/admin-dashboard",
+      element: <AdminDashboard/>
+    },
+    {
+      path: "/admin/add-drive",
+      element: <AddDrive/>
     }
   ]);
 
