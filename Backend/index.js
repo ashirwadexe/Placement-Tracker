@@ -4,11 +4,12 @@ import dotenv from "dotenv";
 import connectDB from "./utils/db.js";
 import adminRouter from "./routes/admin.route.js";
 import studentRouter from "./routes/student.route.js";
+import calenderRouter from "./routes/calender.route.js";
 import cors from "cors";
 import cookieParser from 'cookie-parser';
 
 dotenv.config();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 
 app.use(express.json());
 app.use(cookieParser()); 
@@ -23,6 +24,7 @@ app.use(
 //apis
 app.use("/api/v1/admin", adminRouter);
 app.use("/api/v1/admin/student", studentRouter);
+app.use("/api/v1/admin/calender", calenderRouter);
 
 app.listen(PORT, () => {
     connectDB();

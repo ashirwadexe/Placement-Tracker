@@ -1,3 +1,5 @@
+import { PlacementCalender } from "../model/calender.model.js";
+
 export const createCalender = async (req, res) => {
     try {
         const {hiringDate, company, position, hiringType, location} = req.body;
@@ -10,7 +12,7 @@ export const createCalender = async (req, res) => {
             });
         };
 
-        const newCalender = await Calender.create({
+        const newCalender = await PlacementCalender.create({
             hiringDate,
             company,
             position,
@@ -32,7 +34,7 @@ export const createCalender = async (req, res) => {
 
 export const getAllCalenders = async (req, res) => {
     try {
-        const calenders = await Calender.find();
+        const calenders = await PlacementCalender.find();
 
         return res.status(200).json({
             success: true,
@@ -49,7 +51,7 @@ export const deleteCalender = async (req, res) => {
         const id = req.params.id;
         const userId = req.id;
 
-        const calender = await Calender.findById(id);
+        const calender = await PlacementCalender.findById(id);
 
         if(calender.user.toString() !== userId) {
             return res.status(401).json({
@@ -57,8 +59,7 @@ export const deleteCalender = async (req, res) => {
                 success: false
             });
         };
-
-        await Calender.findByIdAndDelete(id);
+        await PlacementCalender.findByIdAndDelete(id);
 
         return res.status(200).json({
             message: "Calender Deleted!",

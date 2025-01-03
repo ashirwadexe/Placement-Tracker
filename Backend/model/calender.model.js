@@ -16,7 +16,12 @@ const calenderSchema = new mongoose.Schema({
     },
     location: {
         type: String
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Admin',
+        required: true
     }
 }, {timestamps: true});
 
-export const Calender = mongoose.model("Calender", calenderSchema);
+export const PlacementCalender = mongoose.model("PlacementCalender", calenderSchema);
