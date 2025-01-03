@@ -15,7 +15,7 @@ const Hero = () => {
   };
   return (
     <>
-      <div className="flex flex-col items-center justify-center mt-20 gap-5">
+      <div className="flex flex-col items-center justify-center mt-20 gap-3">
         <HoverCard>
           <HoverCardTrigger>
             <p className="border rounded-full px-5 py-1 bg-gray-700 text-sm text-gray-300 border-gray-400 font-semibold">
@@ -32,11 +32,11 @@ const Hero = () => {
             </a>
           </HoverCardContent>
         </HoverCard>
-        <h1 className=" text-7xl font-bold">Placement Bro</h1>
-        <p className=" text-lg font-semibold text-gray-400 ">
-          Celebrating Our Students' Success Stories
+        <h1 className=" text-6xl font-bold">Placement Bro</h1>
+        <p className=" text-[15px] font-semibold text-gray-400 w-[50%] text-center">
+          Celebrating Our Students' Success Stories, Placement Bro is Kashi Group of Institution's exclusive platform that showcases and celebrates student placement success stories. This comprehensive placement tracking system helps students and administrators stay updated with campus recruitment activities, featuring
         </p>
-        <div className="flex w-[80%] bg-white shadow-[rgba(0,_0,_0,_0.4)_0px_30px_90px] border border-gray-200 rounded-full items-center gap-4 mx-auto pl-3">
+        <div className="flex w-[40%] bg-white shadow-[rgba(0,_0,_0,_0.4)_0px_30px_90px] border border-gray-200 rounded-full items-center gap-4 mx-auto pl-3">
           <input
             type="text"
             placeholder="Search placed students..."

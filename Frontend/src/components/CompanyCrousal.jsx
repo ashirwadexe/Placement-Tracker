@@ -6,7 +6,7 @@ import { Carousel, CarouselContent, CarouselItem } from './ui/carousel';
 function CompanyCrousal() {
   return (
     <div className='max-w-7xl mx-auto flex flex-col items-center justify-center'>
-      <h1 className='text-3xl font-semibold'>Our Top Reqruiters</h1>
+      {/* <h1 className='text-3xl font-semibold'>Our Top Reqruiters</h1> */}
       <Carousel
         loop={true} // Enable looping
         plugins={[Autoplay({ delay: 2000, stopOnInteraction: false })]} // Autoplay settings

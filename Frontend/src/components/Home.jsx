@@ -13,7 +13,7 @@ const Home = () => {
     <div>
       <div className="max-w-9xl mx-auto flex flex-col items-center justify-center gap-5">
         <Hero />
-        <div className="flex gap-2 my-5">
+        <div className="flex gap-2 my-3">
           <Button 
             onClick={()=> toast.success("Placement Calender is not available right now. Please check back later.")}
             className="bg-red-500 hover:bg-red-400 font-sans">
